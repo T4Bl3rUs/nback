@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N Back Game</title>
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="gameContainer" class="nes-container is-dark with-title is-centered">
+        <p class="title">N-Back Game</p>
+        <div id="gameContainerInner">
+            <div id="mainMenu" class="screen active">
+                <div id="title">Main Menu</div>
+                <div>
+                    <button class="nes-btn is-primary" onclick="showGameModes()">Game Modes</button>
+                    <button class="nes-btn is-primary" onclick="showSettings()">Settings</button>
+                </div>
+            </div>
+            <div id="settingsScreen" class="screen" style="display: none;">
+                <div id="title">Settings</div>
+                <div>
+                    <div class="sliderContainer nes-container is-rounded is-dark">
+                        <div class="sliderLabel">Grid Size:</div>
+                        <div class="sliderInput">
+                            <input type="range" min="3" max="5" step="1" value="3" class="gameSlider" id="gridSizeSlider">
+                            <input type="number" min="3" max="5" value="3" class="sliderValue" id="gridSizeValue">
+                        </div>
+                    </div>
+                    <div class="sliderContainer nes-container is-rounded is-dark">
+                        <div class="sliderLabel">Inner Grid Size:</div>
+                        <div class="sliderInput">
+                            <input type="range" min="2" max="5" step="1" value="2" class="gameSlider" id="innerGridSizeSlider">
+                            <input type="number" min="2" max="5" value="2" class="sliderValue" id="innerGridSizeValue">
+                        </div>
+                    </div>
+                    <div class="sliderContainer nes-container is-rounded is-dark">
+                        <div class="sliderLabel">N-Back:</div>
+                        <div class="sliderInput">
+                            <input type="range" min="1" max="20" step="1" value="2" class="gameSlider" id="nBackSlider">
+                            <input type="number" min="1" max="20" value="2" class="sliderValue" id="nBackValue">
+                        </div>
+                    </div>
+                    <div class="sliderContainer nes-container is-rounded is-dark">
+                        <div class="sliderLabel">Time Interval:</div>
+                        <div class="sliderInput">
+                            <input type="range" min="0.5" max="3" step="0.1" value="1" class="gameSlider" id="timeIntervalSlider">
+                            <input type="number" min="0.5" max="3" value="1" class="sliderValue" id="timeIntervalValue">
+                        </div>
+                    </div>
+                </div>
+                <button class="backButton nes-btn is-dark" onclick="goBack()">Back</button>
+            </div>
+            <div id="gameModes" class="screen" style="display: none;">
+                <div id="title">Game Modes</div>
+                <div>
+                    <button data-mode="compare" class="nes-btn is-primary gameModeBtn" onclick="startCompareMode()">Compare</button>
+                    <button data-mode="draw" class="nes-btn is-primary gameModeBtn" onclick="startDrawMode()">Draw</button>
+                    <button data-mode="reverse" class="nes-btn is-primary gameModeBtn" onclick="startReverseMode()">Reverse</button>
+                    <button data-mode="selectAll" class="nes-btn is-primary gameModeBtn" onclick="startSelectAllMode()">Select All</button>
+                </div>
+                <br>
+                <div class="nes-container with-title is-rounded is-dark modeDescription" style="width: 75%;">
+                    <p class="title">Info</p>
+                    <div>
+                        <p class="nes-text gameModeDesc">(hover over a game mode to reveal the instructions)</p>
+                        <p class="nes-text compare gameModeDescTitle" style="display: none;">Compare Mode:</p>
+                        <p class="nes-text compare gameModeDesc" style="display: none;">Classic version of N-Back, where you'll keep seeing new figures and you have to specify in which properties they match the one you saw N figures ago.</p>
+                        <p class="nes-text draw gameModeDescTitle" style="display: none;">Draw Mode:</p>
+                        <p class="nes-text draw gameModeDesc" style="display: none;">In this mode, you'll either be shown a new figure or you'll be asked to draw the one you saw N iterations ago.</p>
+                        <p class="nes-text reverse gameModeDescTitle" style="display: none;">Reverse Mode:</p>
+                        <p class="nes-text reverse gameModeDesc" style="display: none;">In this mode, you'll be shown a sequence of figures, and then you'll be given a target shape. Your goal is to accurately specify how many figures ago you saw your target.</p>
+                        <p class="nes-text selectAll gameModeDescTitle" style="display: none;">Select All Mode:</p>
+                        <p class="nes-text selectAll gameModeDesc" style="display: none;">In this mode, you'll either be shown a new figure or a grid filled with shapes from which you have to select all those that have at least one property in common with the one you saw N figures ago.</p>
+                    </div>
+                </div>
+                <button class="backButton nes-btn is-dark" onclick="goBack()">Back</button>
+            </div>
+            <div id="gameScreen" class="screen" style="display: none;">
+                <div style="overflow: hidden; width: fit-content;height: 100%;display: flex;justify-content: center;">
+                    <div id="gameGrid"></div>
+                </div>
+                <div id="compareModeButtons" class="gameButtons" style="display: none;">
+                    <button id="btnCompareShape" class="nes-btn is-disabled" onclick="toggleShape()">Shape (s)</button>
+                    <button id="btnComparePosition" class="nes-btn is-disabled" onclick="togglePosition()">Position (p)</button>
+                    <button id="btnCompareColor" class="nes-btn is-disabled" onclick="toggleColor()">Color (c)</button>
+                </div>
+                <div id="drawModeButtons" class="gameButtons" style="display: none;">
+                    <button id="btnDrawReset" class="nes-btn is-disabled" onclick="">Reset Drawing</button>
+                    <button id="btnDrawSubmit" class="nes-btn is-disabled" onclick="">Submit</button>
+                </div>
+                <div id="reverseModeButtons" class="gameButtons" style="display: none; align-items: center;">
+                    <div style="display: flex;">
+                        <div>N-Back:</div>
+                        <div>
+                            <input type="range" min="1" max="2" step="1" value="1" class="gameSlider" id="sliderReverseNBack" disabled>
+                            <input type="number" min="1" max="2" value="1" class="sliderValue" id="sliderReverseNBackValue" style="margin-left: -1rem;" disabled>
+                        </div>
+                    </div>
+                    <button id="btnReverseSubmit" class="nes-btn is-disabled" onclick="reverseGuess()" style="height: fit-content;">Submit</button>
+                </div>
+                <div id="selectModeButtons" class="gameButtons" style="display: none;">
+                    <button id="btnSelectSubmit" class="nes-btn is-disabled" onclick="selectSubmit()">Submit</button>
+                </div>
+                <button class="backButton nes-btn is-dark" onclick="exitGame()">Back</button>
+                <div id="scores" class="scores" style="display: none;">
+                    <p>Highscore: <span id="highScore">0</span></p>
+                    <p>Score: <span id="currentScore">0</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <dialog class="nes-dialog is-dark is-rounded" id="exit-game-dialog">
+        <form method="dialog" style="text-align: center;">
+            <p class="title">Exit Game</p>
+            <p>Are you sure you want to leave the game?<br>Your streak will be lost.</p>
+            <menu class="dialog-menu" style="margin-bottom: 0;">
+                <button class="nes-btn" onclick="game.pause('running')">Cancel</button>
+                <button class="nes-btn is-primary" onclick="showGameModes()">Confirm</button>
+            </menu>
+        </form>
+    </dialog>
+    <div id="pauseOverlay" class="overlay" style="display: none; z-index: 10;">
+        <div class="nes-dialog is-dark is-rounded" style="text-align: center;">
+            <p>Game Paused</p>
+            <p>Press ESC to resume</p>
+        </div>
+    </div>
+    <div id="startPrompt" class="overlay" style="display: none; z-index: 10;">
+        <div class="nes-dialog is-dark is-rounded" style="text-align: center;">
+            <p>Press ESC to pause the game at any time</p>
+            <menu class="dialog-menu">
+                <button class="nes-btn" onclick="showGameModes()">Cancel</button>
+                <button class="nes-btn is-primary" onclick="game.start()">Start Game</button>
+            </menu>
+        </div>
+    </div>
+    <div id="backdrop" class="backdrop"></div>
+    <script src="script.js"></script>
+</body>
+</html>
