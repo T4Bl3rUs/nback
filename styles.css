@@ -132,6 +132,10 @@ body {
     background-color: rgba(241,230,108, 0.35);
 }
 
+.gridCell.drawing {
+    background-color: rgba(241,230,108, 0.1);
+}
+
 .gridRow {
     display: flex;
     justify-content: center;
@@ -463,4 +467,29 @@ input[type="range"]:disabled::-moz-range-thumb {
     margin-right: auto;
     margin-top: calc(-2rem + 0.75px);
     margin-bottom: 1rem;
+}
+
+
+
+
+
+
+
+
+.color-button {
+    width: 44px;
+    height: 44px;
+    margin: 5px;
+    border-image-source: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(255, 255, 255)" /></svg>');
+    cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0,pointer;
+    border-width: 4px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    border-image-repeat: stretch;
+    border-image-slice: 3;
+    border-image-width: 3;
+    border-image-repeat: stretch;
+    border-image-outset: 1;
+    border-style: solid;
+    border-color: transparent;
 }
