@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>N Back Game</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -73,7 +74,7 @@
                         <p class="nes-text reverse gameModeDescTitle" style="display: none;">Reverse Mode:</p>
                         <p class="nes-text reverse gameModeDesc" style="display: none;">In this mode, you'll be shown a sequence of figures, and then you'll be given a target shape. Your goal is to accurately specify how many figures ago you saw your target.</p>
                         <p class="nes-text selectAll gameModeDescTitle" style="display: none;">Select All Mode:</p>
-                        <p class="nes-text selectAll gameModeDesc" style="display: none;">In this mode, you'll either be shown a new figure or a grid filled with shapes from which you have to select all those that have at least one property in common with the one you saw N figures ago.</p>
+                        <p class="nes-text selectAll gameModeDesc" style="display: none;">In this mode, you'll either be shown a new figure or a grid filled with shapes from which you have to select all those that have at least one property (position, shape, color) in common with the one you saw N figures ago.</p>
                     </div>
                 </div>
                 <button class="backButton nes-btn is-dark" onclick="goBack()">Back</button>
@@ -87,11 +88,17 @@
                     <button id="btnComparePosition" class="nes-btn is-disabled" onclick="togglePosition()">Position (p)</button>
                     <button id="btnCompareColor" class="nes-btn is-disabled" onclick="toggleColor()">Color (c)</button>
                 </div>
-                <div id="drawModeButtons" class="gameButtons" style="display: none;">
-                    <button id="btnDrawReset" class="nes-btn is-disabled" onclick="">Reset Drawing</button>
-                    <button id="btnDrawSubmit" class="nes-btn is-disabled" onclick="">Submit</button>
+                <div id="drawModeButtons" class="gameButtons" style="display: none; align-items: center; flex-wrap: wrap; justify-content: center;">
+                    <div class="color-button" data-color="hsl(0, 75%, 75%)" style="background-color: hsl(0, 75%, 75%)"></div>
+                    <div class="color-button" data-color="hsl(60, 75%, 75%)" style="background-color: hsl(60, 75%, 75%)"></div>
+                    <div class="color-button" data-color="hsl(120, 75%, 75%)" style="background-color: hsl(120, 75%, 75%)"></div>
+                    <div class="color-button" data-color="hsl(180, 75%, 75%)" style="background-color: hsl(180, 75%, 75%)"></div>
+                    <div class="color-button" data-color="hsl(240, 75%, 75%)" style="background-color: hsl(240, 75%, 75%)"></div>
+                    <div class="color-button" data-color="hsl(300, 75%, 75%)" style="background-color: hsl(300, 75%, 75%)"></div>
+                    <button id="btnDrawReset" class="nes-btn is-disabled" onclick="drawReset()">Reset Drawing</button>
+                    <button id="btnDrawSubmit" class="nes-btn is-disabled" onclick="drawSubmit()">Submit</button>
                 </div>
-                <div id="reverseModeButtons" class="gameButtons" style="display: none; align-items: center;">
+                <div id="reverseModeButtons" class="gameButtons" style="display: none; align-items: center; flex-wrap: wrap; justify-content: center;">
                     <div style="display: flex;">
                         <div>N-Back:</div>
                         <div>
