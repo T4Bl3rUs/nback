@@ -3,8 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N Back Game</title>
+    <title>N-Back Game</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="description" content="Retro N-Back by Table">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://table-nback.netlify.app/">
+    <meta property="og:title" content="N-Back Game">
+    <meta property="og:description" content="Retro N-Back by Table">
+    <meta property="og:image" content="https://table-nback.netlify.app/favicon.png">
+
+    <meta property="twitter:card" content="summary_large_small">
+    <meta property="twitter:url" content="https://table-nback.netlify.app/">
+    <meta property="twitter:title" content="N-Back Game">
+    <meta property="twitter:description" content="Retro N-Back by Table">
+    <meta property="twitter:image" content="https://table-nback.netlify.app/favicon.png">
+
     <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -57,7 +71,7 @@
             <div id="gameModes" class="screen" style="display: none;">
                 <div id="title">Game Modes</div>
                 <div>
-                    <button data-mode="compare" class="nes-btn is-primary gameModeBtn" onclick="startCompareMode()">Compare</button>
+                    <button data-mode="compare" class="nes-btn is-primary gameModeBtn" onclick="startCompareMode()">Classic</button>
                     <button data-mode="draw" class="nes-btn is-primary gameModeBtn" onclick="startDrawMode()">Draw</button>
                     <button data-mode="reverse" class="nes-btn is-primary gameModeBtn" onclick="startReverseMode()">Reverse</button>
                     <button data-mode="selectAll" class="nes-btn is-primary gameModeBtn" onclick="startSelectAllMode()">Select All</button>
@@ -67,7 +81,7 @@
                     <p class="title">Info</p>
                     <div>
                         <p class="nes-text gameModeDesc">(hover over a game mode to reveal the instructions)</p>
-                        <p class="nes-text compare gameModeDescTitle" style="display: none;">Compare Mode:</p>
+                        <p class="nes-text compare gameModeDescTitle" style="display: none;">Classic Mode:</p>
                         <p class="nes-text compare gameModeDesc" style="display: none;">Classic version of N-Back, where you'll keep seeing new figures and you have to specify in which properties they match the one you saw N figures ago.</p>
                         <p class="nes-text draw gameModeDescTitle" style="display: none;">Draw Mode:</p>
                         <p class="nes-text draw gameModeDesc" style="display: none;">In this mode, you'll either be shown a new figure or you'll be asked to draw the one you saw N iterations ago.</p>
